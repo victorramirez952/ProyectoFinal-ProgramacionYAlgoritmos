@@ -1,0 +1,245 @@
+Algoritmo RegistroMaletas
+    //variables fijas o constantes
+    Definir max_regular_nacional como Flotante;
+    Definir max_regular_internacional como Flotante;
+    Definir max_mascota_nacional como Flotante:
+    Definir max_mascota_internacional como Flotante;
+    Definir max_fragil_nacional como Flotante;
+    Definir max_fragil_internacional como Flotante;
+
+    max_regular_nacional <- 32
+    max_regular_internacional <- 23
+    max_mascota_nacional <- 25
+    max_mascota_internacional <- 20
+    max_fragil_nacional <- 32
+    max_fragil_internacional <- 23
+
+    Definir finalizar como Entero
+    finalizar <- 1
+    Mientras (finalizar == 1) Hacer
+        //menú de opciones
+        Definir opcion_de_uso como String
+        opcion_de_uso <- "0"
+        Mientras (opcion_de_uso != "1" Y opcion_de_uso != "2" Y opcion_de_uso != "3") Hacer
+            Escribir “Selecciona una de las siguientes opciones:"
+            Escribir "1 - Administrador"
+            Escribir "2 - Pasajero"
+            Escribir "3 - Finalizar programa"
+            Leer opcion_de_uso
+        FinMientras
+        
+        Definir respuesta como String
+        respuesta <- "0"
+
+        Si (opcion_de_uso == "1")Entonces
+            Definir usuario como String
+            Escribir “Ingresa tu usuario”
+            Leer usuario
+            Definir password como String
+            Escribir “Ingresa la contraseña”
+            Leer password
+
+            Si (usuario == “Admin” Y password == “1234”) Entonces
+                Mientras (respuesta != "1" Y respuesta != "2") Hacer
+                    Escribir “¿Desea asignar nuevos valores a los pesos máximos?”
+                    Escribir "1 - Si"
+                    Escribir "2 - No"
+                    Leer respuesta
+                FinMientras
+                
+                
+                Si (respuesta == "1") Entonces
+                    respuesta <- "0"
+                    Escribir “Ingresa el peso máximo para una maleta regular en vuelo nacional”
+                    Leer max_regular_nacional
+                    Escribir “Ingresa el peso máximo para una maleta en vuelo internacional”
+                    Leer max_regular_internacional
+                    Escribir “Ingresa el peso máximo para una maleta tipo de mascota en vuelo nacional”
+                    Leer max_mascota_nacional
+                    Escribir “Ingresa el peso máximo para una maleta tipo de mascota en vuelo internacional”
+                    Leer max_mascota_internacional
+                    Escribir “Ingresa el peso máximo para una maleta frágil en vuelo nacional”
+                    Leer max_fragil_nacional
+                    Escribir “Ingresa el peso máximo para una maleta frágil en vuelo internacional”
+                    Leer max_fragil_internacional
+                FinSi
+                //Limpiar pantalla
+            SiNo
+                Escribir “Los credenciales ingresadas son incorrectas”
+                //Limpiar pantalla
+            FinSi
+        FinSi
+        Si (opcion_de_uso == "2") Entonces
+            //Proceso que sigue un usuario regular
+            //Se pregunta por la cantidad de personas totales en una reservación  
+
+            Definir cantidad_personas_en_reserva como String
+            cantidad_personas_en_reserva <- "0"
+            Mientras (cantidad_personas_en_reserva <= 0 Y cantidad_personas_en_reserva > 10) Hacer
+                Escribir “¿Cuántas personas viajan contigo? (Incluyéndose a usted)”
+                Leer cantidad_personas_en_reserva
+                Si (cantidad_personas_en_reserva > 10) Entonces
+                    Escribir "No es posible su reservación porque no puede ser para más de 10 personas"
+                FinSi
+            FinMientras
+
+            //Se pregunta por el tipo de vuelo
+            Definir tipo_de_vuelo como String
+            tipo_de_vuelo <- "0"
+            Mientras (tipo_de_vuelo != "1" Y tipo_de_vuelo != "2") Hacer
+                Escribir “¿Cuál es el tipo de vuelo?"
+                Escribir "1 - Nacional"
+                Escribir "2 - Internacional”
+                Leer tipo_de_vuelo
+            FinMientras
+
+            Definir precio_total como Flotante
+            precio_total <- 0
+            Definir peso total como Flotante
+            peso_total <- 0
+            Definir pasajeros[][] como String
+            pasajeros[cantidad_personas_en_reserva][4]
+            Para (i <- 0) Hasta (cantidad_personas_en_reserva) Con Paso 1 Hacer
+                Definir nombre como String
+                Escribir “Ingresa tu nombre”
+                Leer nombre
+                pasajeros[i][1] <- nombre
+                
+                Definir cantidad_maletas como String
+                cantidad_maletas <- "0"
+                Mientras (cantidad_maletas <= 0) Hacer
+                    Escribir “¿Cuántas maletas vas a ingresar?”
+                    Leer cantidad_maletas
+                FinMientras
+                pasajeros[i][2] <- cantidad_maletas
+
+                Definir peso_total_pasajero como Flotante
+                peso_total_pasajero <- 0;
+
+                Definir precio_total_pasajero como Flotante
+                precio_total_pasajero <- 0
+
+                Para (j <- 0) Hasta cantidad_maletas Con Paso 1 Hacer
+                    Definir peso_maleta como String
+                    //VALIDACIÓN FLOTANTE
+                    Mientras (peso_maleta <= 0 Y peso_maleta) Hacer
+                        Escribir “Coloque la maleta en la bascula”
+                        Leer peso_maleta
+                    FinMientras
+                    peso_total_pasajero = peso_total_pasajero + peso_maleta
+
+                    Definir tipo_maleta como String
+                    Mientras (tipo_maleta != "1" Y tipo_maleta != "2" Y tipo_maleta != "3") Hacer
+                        Escribir “Ingresa el tipo de maleta:"
+                        Escribir "1 - regular"
+                        Escribir "2 - frágil" 
+                        Escribir "3 - mascota”
+                        Leer tipo_maleta
+                    FinMientras
+
+                    Según (tipo_maleta) Hacer: //convertir a entero tipo_maleta
+                                1:  Si (tipo_de_vuelo == 1)  Entonces
+                                        Si (peso <= max_regular_nacional) Entonces
+                                            precio <- 600
+                                        SiNo
+                                            precio <- 600 + 500
+                                        FinSi
+                                    SiNo
+                                        Si (peso <= max_regular_internacional) Entonces
+                                            precio <- 10
+                                        SiNo
+                                            precio <- precio + 500 
+                                        FinSi
+                                    FinSi
+                                2:  Si (tipo_de_vuelo == 1)  Entonces
+                                        Si (peso <= max_fragil_nacional) Entonces
+                                            precio <- 10
+                                        SiNo
+                                            precio <- 700 + 500  
+                                        FinSi
+                                    SiNo
+                                        Si (peso <= max_fragil_internacional) Entonces
+                                            precio <- 10
+                                        SiNo
+                                            precio <- 1400 + 500 
+                                        FinSi
+                                    FinSi
+                                3:  Si (tipo_de_vuelo == 1)  Entonces
+                                        Si (peso <= max_mascota_nacional) Entonces
+                                            precio <- 10
+                                        SiNo
+                                            precio <- 800 + 500 
+                                        FinSi
+                                    SiNo
+                                        Si (peso <= max_mascota_internacional) Entonces
+                                            precio <- 10
+                                        SiNo
+                                            precio <- 1600 + 500
+                                        FinSi
+                                    FinSi
+                    FinSegún
+                    precio_total_pasajero <- precio_total_pasajero + precio
+                    peso_total_pasajero <- peso_total_pasajero + peso
+                FinPara
+                pasajeros[i][1] <- peso_total_pasajero //conversion a string
+                pasajeros[i][2] <- precio_total_pasajero //conversion a string
+                peso_total <- peso_total + peso_total_pasajero
+                precio_total <- precio_total + precio_total_pasajero
+            FinPara
+
+            Escribir “Tu total a pagar es de” + precio_total
+            Escribir “El peso total de las maletas es de” + peso_total
+
+            Escribir "1 - Aceptar"
+            Escribir "2 - Cancelar"
+            Mientras (respuesta != "1" Y respuesta != "2") Hacer
+                Leer respuesta
+            FinMientras
+
+            Si (respuesta == "2") Entonces
+                respuesta <- "0";
+
+                Escribir "¿Desea ver la factura?"
+                Escribir "1 - Si"
+                Escribir "2 - No"
+                Mientras (respuesta != "1" Y respuesta != "3") Entonces
+                    Leer respuesta
+                FinMientras
+
+                Si (respuesta == "1") Entonces
+                    Escribir “[Nombre][Cantidad de Maletas][Peso Maletas][Precio Maletas]”
+                    Para (i <- 0) Hasta (cantidad_personas_en_reserva) Con paso 1 Hacer
+                        Para (j <- 0) Hasta (4) Con paso 1 Hacer
+                            Escribir “[“ + pasajeros[i][j] + “]”
+                        FinPara
+                        Escribir endl;
+                    FinPara 
+                FinSi
+
+                //Limpiar pantalla
+            SiNo
+                respuesta <- "0";
+
+                Escribir "¿Desea ver la factura?"
+                Escribir "1 - Si"
+                Escribir "2 - No"
+                Mientras (respuesta != "1" Y respuesta != "3") Entonces
+                    Leer respuesta
+                FinMientras
+
+                Si (respuesta == "1") Entonces
+                    Escribir “[Nombre][Peso][Cantidad de Maletas]”
+                    Para (i <- 0) Hasta (cantidad_personas_en_reserva) Con paso 1 Hacer
+                        Para (j <- 0) Hasta (cantidad_personas_en_reserva) Con paso 1 Hacer
+                            Escribir “[“ + pasajeros[i][j] + “]”
+                        FinPara
+                        Escribir endl;
+                    FinPara 
+                FinSi     
+            FinSi
+        FinSi
+        Si (opcion_de_uso == "3") Entonces
+            finalizar <- 1      
+        FinSi
+    FinMientras    
+FinAlgoritmo

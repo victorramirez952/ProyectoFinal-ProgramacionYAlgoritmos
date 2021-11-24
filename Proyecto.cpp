@@ -4,18 +4,16 @@
 using namespace std;
 int main()
 {
+    float max_regular_nacional = 32;
+    float max_regular_internacional = 23;
+    float max_mascota_nacional = 25;
+    float max_mascota_internacional = 20;
+    float max_fragil_nacional = 32;
+    float max_fragil_internacional = 23;
+    
     int finalizar = 0;
     while(finalizar == 0)
     {
-        //
-        int max_regular_nacional = 32;
-        int max_regular_internacional = 23;
-        int max_mascota_nacional = 25;
-        int max_mascota_internacional = 20;
-        int max_fragil_nacional = 32;
-        int max_fragil_internacional = 23;
-        //
-
         //menu de opciones
         string opcion_de_uso = "0";
         while(opcion_de_uso != "1" && opcion_de_uso != "2" && opcion_de_uso != "3")
@@ -29,21 +27,23 @@ int main()
         }
 
         string respuesta = "0";
+        bool validacion = true;
+        char pregunta = 168;
+        char enie = 164;
         
         if(opcion_de_uso == "1")
         {
             string usuario, password;
             cout << "Ingresa tu usuario" << endl;
             cin >> usuario;
-            cout << "Ingresa tu contrasenia" << endl;
+            cout << "Ingresa tu contrase" << enie << "a" << endl;
             cin >> password;
 
             if(usuario == "admin" && password == "1234")
             {
-                // int asignar_nuevos_valores = 0;
                 while(respuesta != "1" && respuesta != "2")
                 {
-                    cout << "Desea asignar nuevos valores a los pesos maximos?" << endl;
+                    cout << pregunta << "Desea asignar nuevos valores a los pesos maximos?" << endl;
                     cout << "1 - Si" << endl;
                     cout << "2 - No" << endl;
                     cin >> respuesta;
@@ -52,17 +52,17 @@ int main()
                 if(respuesta == "1")
                 {
                     respuesta = "0";
-                    cout << "Ingresa el peso maximo para una maleta regular en vuelo nacional" << endl;
+                    cout << "Ingresa el peso maximo para una maleta regular en vuelo nacional (actual = " << max_regular_nacional << ")" << endl;
                     cin >> max_regular_nacional;
-                    cout << "Ingresa el peso maximo para una maleta en vuelo internacional" << endl;
+                    cout << "Ingresa el peso maximo para una maleta en vuelo internacional (actual = " << max_regular_internacional << ")" << endl;
                     cin >> max_regular_internacional;
-                    cout << "Ingresa el peso maximo para una maleta tipo de mascota en vuelo nacional" << endl;
+                    cout << "Ingresa el peso maximo para una maleta tipo de mascota en vuelo nacional (actual = " << max_mascota_nacional << ")" << endl;
                     cin >> max_mascota_nacional;
-                    cout << "Ingresa el peso maximo para una maleta tipo de mascota en vuelo internacional" << endl;
+                    cout << "Ingresa el peso maximo para una maleta tipo de mascota en vuelo internacional (actual = " << max_mascota_nacional << ")" << endl;
                     cin >> max_mascota_internacional;
-                    cout << "Ingresa el peso maximo para una maleta fragil en vuelo nacional" << endl;
+                    cout << "Ingresa el peso maximo para una maleta fragil en vuelo nacional (actual = " << max_fragil_nacional << ")" << endl;
                     cin >> max_fragil_nacional;
-                    cout << "Ingresa el peso maximo para una maleta fragil en vuelo internacional" << endl;
+                    cout << "Ingresa el peso maximo para una maleta fragil en vuelo internacional (actual = " << max_fragil_internacional << ")" << endl;
                     cin >> max_fragil_internacional;
                 }
                 system("PAUSE()");
@@ -79,10 +79,10 @@ int main()
         if(opcion_de_uso == "2")
         {
             string cantidad_personas_en_reserva = "0";
-            bool validacion = true;
+            validacion = true;
             while(validacion)
             {
-                cout << "Cuantas personas viajan contigo? (Incluido usted)" << endl;
+                cout << pregunta << "Cuantas personas viajan contigo? (Incluido usted)" << endl;
                 cin >> cantidad_personas_en_reserva;
                 if(cantidad_personas_en_reserva.find_first_not_of("0123456789") == string::npos)
                 {
@@ -96,7 +96,7 @@ int main()
             string tipo_de_vuelo = "0";
             while(tipo_de_vuelo != "1" && tipo_de_vuelo != "2")
             {
-                cout << "Cual es el tipo de vuelo?" << endl;
+                cout << pregunta << "Cual es el tipo de vuelo?" << endl;
                 cout << "1 - Nacional" << endl;
                 cout << "2 - Internacional" << endl;
                 cin >> tipo_de_vuelo;
@@ -113,13 +113,12 @@ int main()
             {
                 string nombre;
                 cout << "Ingresa tu nombre" << endl;
-                bool validacion = true;
+                validacion = true;
                 while (validacion)
                 {
                     cin >> nombre;
                     if(nombre.find_first_not_of("0123456789") != string::npos)
                     {
-                        cout << "Su nombre es válido" << endl;
                         validacion = false;
                     }
                 }
@@ -131,7 +130,7 @@ int main()
 
                 while(validacion)
                 {
-                    cout << "Cuantas maletas vas a ingresar?" << endl;
+                    cout << pregunta <<"Cuantas maletas vas a ingresar?" << endl;
                     cantidad_maletas = "0";
                     cin >> cantidad_maletas;
                     if(cantidad_maletas.find_first_not_of("0123456789") == string::npos)
@@ -152,10 +151,10 @@ int main()
                 for(int j = 0; j < atoi(cantidad_maletas.c_str()); j++)
                 {
                     string peso_maleta = "0";
-                    bool validacion = true;
+                    validacion = true;
                     while(validacion)
                     {
-                        cout << "Peso de la maleta:" << endl;
+                        cout << "Peso de la maleta #"<< (j+1) << ":" << endl;
                         cin >> peso_maleta;
                         if(peso_maleta.find_first_not_of("0123456789.") == string::npos)
                         {
@@ -254,7 +253,7 @@ int main()
             if(respuesta == "2")
             {
                 respuesta = "0";
-                cout << "Desea ver informacion de las maletas de esta reservacion?" << endl;
+                cout << pregunta << "Desea ver informacion de las maletas de esta reservacion?" << endl;
                 cout << "1 - Si" << endl;
                 cout << "2 - No" << endl;
                 while(respuesta != "1" && respuesta != "2")
@@ -281,7 +280,7 @@ int main()
             else //si respuesta es igual a "1"
             {
                 respuesta = "0";
-                cout << "Desea imprimir la factura?" << endl;
+                cout << pregunta << "Desea imprimir la factura?" << endl;
                 cout << "1 - Si" << endl;
                 cout << "2 - No" << endl;
                 while(respuesta != "1" && respuesta !="2")
